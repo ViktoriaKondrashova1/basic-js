@@ -15,9 +15,10 @@ function deleteDigit(n) {
   let str = n.toString();
   let max = 0;
   for(let i = 0; i < str.length; i++) {
-    str = str - str.slice(i, i+1);
-    if(str > max) {
-      max = Number(str);
+    let newStr = str.replace(str[i], '');
+    if(newStr > max) {
+      max = Number(newStr);
+      newStr = '';
     }
   }
   return max
