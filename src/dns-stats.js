@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js');
+const { NotImplementedError } = require("../extensions/index.js");
 
 /**
  * Given an array of domains, return the object with the appearances of the DNS.
@@ -23,20 +23,31 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function getDNSStats(domains) {
-  let obj = {};
+  const res = {};
+  let resArr = [];
 
-  for(let elem of domains) {
-    //obj[elem] = 1;
-    elem = elem.split('.').reverse();
-    console.log(elem);
-    for(let i = 0; i < elem.length; i++) {
-      obj['.' + elem[i]] = '';
-      obj['.' + elem[i] + '.' + elem[i+1]] = '';
+  domains.forEach((domain) => {
+    let arr = [];
+    let dot = domain.indexOf(".");
+    while (dot > -1) {
+      arr.push(domain);
+      domain = domain.slice(dot + 1, domain.length);
+      dot = domain.indexOf(".");
     }
-    console.log(obj);
-  }
+    arr.push(domain);
+    resArr.push(arr.reverse());
+    resArr = resArr.flat();
+  });
+  resArr.forEach((domain) => {
+    const filtered = resArr.filter((elem) => elem === domain);
+    if (!res[domain]) {
+      const key = `.${domain.split(".").reverse().join(".")}`;
+      res[key] = filtered.length;
+    }
+  });
+  return res;
 }
 
 module.exports = {
-  getDNSStats
+  getDNSStats,
 };
