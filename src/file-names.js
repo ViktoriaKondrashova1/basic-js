@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js');
+const { NotImplementedError } = require("../extensions/index.js");
 
 /**
  * There's a list of file, since two files cannot have equal names,
@@ -16,22 +16,18 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function renameFiles(names) {
-  
-for (let i = 0; i < names.length; i++) {
-  let k = 0;
-  for (let a = i + 1; a < names.length; a++) {
-    if (names[i] === names[a]) {
-      k++
-      names.splice(a, 1, names[i] + '(' + k + ')')
-      console.log(names)
+  for (let i = 0; i < names.length; i++) {
+    let k = 0;
+    for (let j = i + 1; j < names.length; j++) {
+      if (names[i] === names[j]) {
+        k++;
+        names.splice(j, 1, `${names[i]}(${k})`);
+      }
     }
   }
-}
-
-return names
-
+  return names;
 }
 
 module.exports = {
-  renameFiles
+  renameFiles,
 };

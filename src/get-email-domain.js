@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js');
+const { NotImplementedError } = require("../extensions/index.js");
 
 /**
  * Given an email address, return it's domain.
@@ -11,10 +11,9 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function getEmailDomain(email) {
-  email = email.split('@');
-  return email[email.length - 1]
+  return email.split("@").at(-1);
 }
 
 module.exports = {
-  getEmailDomain
+  getEmailDomain,
 };
